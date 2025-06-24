@@ -1,0 +1,79 @@
+services:
+  crm-laravel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crm-laravel
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./crm-laravel:/var/www
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=crm-mysql
+      - DB_PORT=3306
+      - DB_DATABASE=laravel
+      - DB_USERNAME=laravel
+      - DB_PASSWORD=root
+      - APP_KEY=base64:your-app-key-here
+    networks:
+      - laravel_net
+    depends_on:
+      - crm-mysql
+
+  crm-next:
+    build:
+      context: ./crm-next
+      dockerfile: Dockerfile
+    container_name: crm-next
+    restart: unless-stopped
+    volumes:
+      - ./crm-next:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://crm:8001
+      - NODE_ENV=development
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "3000:3000"
+    networks:
+      - laravel_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: crm-nginx
+    restart: unless-stopped
+    ports:
+      - "8001:80"
+    volumes:
+      - ./crm-laravel:/var/www
+      - ./crm-next:/var/www/frontend
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - laravel_net
+    depends_on:
+      - crm-laravel
+
+  crm-mysql:
+    image: mysql:8.0
+    container_name: crm-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-laravel}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-root}
+      MYSQL_USER: ${DB_USERNAME:-laravel}
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - laravel_net
+
+networks:
+  laravel_net:
+    driver: bridge
+
+volumes:
+  dbdata: 
