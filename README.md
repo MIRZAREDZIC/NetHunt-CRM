@@ -1,81 +1,81 @@
 # CRM Monorepo
 
-Modern CRM aplikacija izgrađena sa Laravel backend-om i Next.js frontend-om.
+A modern CRM application built with a Laravel backend and Next.js frontend.
 
-## 🚀 Tehnologije
+## 🚀 Technologies
 
 ### Backend
-- **Laravel** - PHP framework za backend API
-- **MySQL/PostgreSQL** - Baza podataka
-- **Docker** - Kontejnerizacija
+- **Laravel** - PHP framework for backend API
+- **MySQL/PostgreSQL** - Database
+- **Docker** - Containerization
 
 ### Frontend
-- **Next.js** - React framework za frontend
-- **TypeScript** - Tipizacija
+- **Next.js** - React framework for frontend
+- **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
 - **React Query** - State management
 
 ### DevOps
-- **Docker Compose** - Multi-container aplikacija
+- **Docker Compose** - Multi-container application
 - **GitHub Actions** - CI/CD pipeline
-- **Cypress** - E2E testiranje
+- **Cypress** - E2E testing
 
-## 📁 Struktura projekta
+## 📁 Project Structure
 
 ```
 crm-monorepo/
 ├── crm-laravel/          # Laravel backend API
-├── crm-next/            # Next.js frontend aplikacija
-├── cypress/             # E2E testovi
-├── docker/              # Docker konfiguracija
+├── crm-next/            # Next.js frontend application
+├── cypress/             # E2E tests
+├── docker/              # Docker configuration
 ├── docker-compose.yml   # Docker Compose setup
 └── package.json         # Root package.json
 ```
 
-## 🛠️ Instalacija i pokretanje
+## 🛠️ Installation & Running
 
 ### Prerequisites
-- Docker i Docker Compose
+- Docker & Docker Compose
 - Node.js (v18+)
 - PHP (v8.1+)
 
-### Pokretanje sa Docker-om
+### Running with Docker
 
-1. Klonirajte repozitorijum:
+1. Clone the repository:
 ```bash
 git clone <your-repo-url>
 cd crm-monorepo
 ```
 
-2. Pokrenite aplikaciju:
+2. Start the application:
 ```bash
 docker-compose up -d
 ```
 
-3. Instalirajte zavisnosti:
+3. Install dependencies:
 ```bash
-# Backend zavisnosti
+# Backend dependencies
 cd crm-laravel && composer install
 
-# Frontend zavisnosti
+# Frontend dependencies
 cd ../crm-next && npm install
 ```
 
-4. Podesite environment varijable:
+4. Set up environment variables:
 ```bash
-# Kopirajte .env.example fajlove
+# Copy .env.example files
 cp crm-laravel/.env.example crm-laravel/.env
 cp crm-next/.env.example crm-next/.env
 ```
 
-5. Pokrenite migracije:
+5. Run migrations:
 ```bash
 cd crm-laravel
 php artisan migrate
 php artisan db:seed
 ```
 
-### Lokalno pokretanje
+### Running Locally
 
 1. Backend (Laravel):
 ```bash
@@ -91,46 +91,46 @@ npm install
 npm run dev
 ```
 
-## 🧪 Testiranje
+## 🧪 Testing
 
-### E2E testovi
+### E2E tests
 ```bash
 cd cypress
 npm run cypress:open
 ```
 
-### Backend testovi
+### Backend tests
 ```bash
 cd crm-laravel
 php artisan test
 ```
 
-### Frontend testovi
+### Frontend tests
 ```bash
 cd crm-next
 npm test
 ```
 
-## 📝 API Dokumentacija
+## 📝 API Documentation
 
-API dokumentacija je dostupna na `/api/documentation` kada je aplikacija pokrenuta.
+API documentation is available at `/api/documentation` when the application is running.
 
-## 🤝 Doprinosi
+## 🤝 Contributing
 
-1. Fork repozitorijum
-2. Kreirajte feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit promene (`git commit -m 'Add some AmazingFeature'`)
-4. Push na branch (`git push origin feature/AmazingFeature`)
-5. Otvorite Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Licenca
+## 📄 License
 
-Ovaj projekat je pod [MIT licencom](LICENSE).
+This project is licensed under the [MIT license](LICENSE).
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
-Vaše ime - [vaš-email@example.com]
+Your Name - [your-email@example.com]
 
 ---
 
-**Napomena**: Ovo je portfolio projekat koji demonstrira veštine u full-stack razvoju sa modernim tehnologijama. 
+**Note:** This is a portfolio project demonstrating full-stack development skills with modern technologies. 
