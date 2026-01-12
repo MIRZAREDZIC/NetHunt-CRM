@@ -1,0 +1,54 @@
+import { ThemeProvider, QueryProvider, ErrorBoundary } from '@/components';
+import { Box } from '@mui/material';
+import './globals.css';
+
+export const metadata = {
+  title: 'CRM System',
+  description: 'Professional CRM System for Business Management',
+  keywords: 'CRM, Customer Relationship Management, Business, Sales',
+  authors: [{ name: 'CRM Team' }],
+  viewport: 'width=device-width, initial-scale=1',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <head>
+        {/* Preload critical resources */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        
+        {/* Optimize font loading with display=swap for better performance */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        />
+      </head>
+      <body>
+        <ErrorBoundary>
+          <QueryProvider>
+            <ThemeProvider>
+              <Box 
+                component="main"
+                sx={{ 
+                  minHeight: '100vh', 
+                  bgcolor: 'background.default',
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                {children}
+              </Box>
+            </ThemeProvider>
+          </QueryProvider>
+        </ErrorBoundary>
+      </body>
+    </html>
+  );
+} 
